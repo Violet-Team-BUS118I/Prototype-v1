@@ -12,7 +12,7 @@ openai.api_key = os.environ["OPENAI_API_KEY"]
 client = OpenAI()
 
 
-# create a wrapper function
+# create a wrapper function 
 def get_completion(prompt, model="gpt-3.5-turbo"):
    completion = client.chat.completions.create(
         model=model,
@@ -33,3 +33,4 @@ with st.form(key = "chat"):
     
     if submitted:
         st.write(get_completion(prompt))
+

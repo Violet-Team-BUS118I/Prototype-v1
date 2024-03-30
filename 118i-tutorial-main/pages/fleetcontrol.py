@@ -1,6 +1,6 @@
 #pip3 install openai==0.28 to install the old version
-#pip3 install openai --upgrade
-#openai migrate
+#pip3 install openai --upgrade to install the latest version
+#openai migrate to automatically upgrade codebase to use the 1.0.0 interface
 import streamlit as st
 import openai
 import os

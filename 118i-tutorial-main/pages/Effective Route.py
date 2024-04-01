@@ -3,7 +3,7 @@ import json
 
 startlocation = str(input("Enter your Start Location: "))
 endlocation = str(input("Enter your destination location: "))
-api_key = 'AIzaSyBHdk35mlQyU05x_nZ7pWXZAHsT9tQ6iDE'
+api_key = str(input("Enter Your Google API Key: "))
 url = 'https://routes.googleapis.com/directions/v2:computeRoutes'
 params = {
   "origin": {
@@ -22,7 +22,7 @@ params = {
 
 headers = {
     'Content-Type': 'application/json',
-    'X-Goog-Api-Key': 'AIzaSyBHdk35mlQyU05x_nZ7pWXZAHsT9tQ6iDE',
+    'X-Goog-Api-Key': api_key,
     #'X-Goog-FieldMask': 'routes.legs.steps.transitDetails'
     'X-Goog-FieldMask': 'routes'
 }

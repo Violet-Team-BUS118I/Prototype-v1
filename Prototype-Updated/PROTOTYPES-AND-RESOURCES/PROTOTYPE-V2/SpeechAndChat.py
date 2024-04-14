@@ -1,5 +1,6 @@
 import streamlit as st
 from openai import OpenAI
+from io import BytesIO
 import os
 
 # Initialize the OpenAI client with your API key
@@ -24,7 +25,7 @@ def text_to_speech(text):
     try:
         response = client.audio.speech.create(
             model="tts-1",
-            voice="alloy",
+            voice="nova",
             input=text
         )
         return response.content
@@ -38,11 +39,13 @@ with st.form("query_form"):
 
 if submit_button and prompt:
     advice = get_energy_advice(prompt)
+    st.write("Energy Saver's advice:")
+    st.write(advice)
+
     if not advice.startswith("An error occurred"):
         audio_content = text_to_speech(advice)
         if not isinstance(audio_content, str):  # Check if audio content is not an error message
             # Create a BytesIO object to write the audio content in memory
-            from io import BytesIO
             audio_buffer = BytesIO(audio_content)
             
             # Display an audio player and a download button in the Streamlit app
@@ -57,4 +60,3 @@ if submit_button and prompt:
             st.write(audio_content)
     else:
         st.write(advice)
-        

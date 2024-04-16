@@ -1,16 +1,34 @@
-# Main App
 import streamlit as st
-from PROTOTYPES_AND_RESOURCES.PROTOTYPE_V2.SpeechAndChat import main as speech_and_chat_main
+
+# Import your actual module names & functions here
 from PROTOTYPES_AND_RESOURCES.PROTOTYPE_V2.EnergySaver import main as energy_saver_main
-from PROTOTYPES_AND_RESOURCES.PROTOTYPE_V2.OpenAITextToSpeech import main as ts
+from PROTOTYPES_AND_RESOURCES.PROTOTYPE_V2.OpenAITextToSpeech import main as text_to_speech_main
+from PROTOTYPES_AND_RESOURCES.PROTOTYPE_V2.SpeechAndChat import main as speech_and_chat_main
 
-st.sidebar.title('Navigation')
 
-if st.sidebar.button('Speech & Chat'):
-    speech_and_chat_main()
+# Set up the page configuration
+st.set_page_config(page_title='Sustainability Suite', layout='wide')
 
-if st.sidebar.button('Energy Saver'):
+# Header setup
+pages = {
+    "Energy Saver": energy_saver_main,
+    "Text to Speech": text_to_speech_main,
+    "Speech and Chat": speech_and_chat_main
+}
+
+# Header Menu
+col1, col2, col3 = st.tabs(["Energy Saver", "Text to Speech", "Speech and Chat"])
+
+with col1:
     energy_saver_main()
 
-if st.sidebar.button('Text-to-Speech File'):
-    ts()
+with col2:
+    text_to_speech_main()
+
+with col3:
+    speech_and_chat_main()
+
+
+#  footer
+st.markdown("---")
+st.markdown("© 2024 Violet Team")

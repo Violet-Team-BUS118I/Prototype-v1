@@ -21,10 +21,12 @@ def get_energy_advice(prompt):
 
 # Main function to run in the app.py
 def main():
-    st.title('Energy Saver')
+    # st.header('Energy Saver')
+    st.markdown("### Energy Saver")
+ 
     st.write('Ask me about energy efficiency, renewable energy sources, and cost-saving strategies.')
-    with st.form("query_form"):
-        prompt = st.text_area("Enter a query about energy consumption:", help="Ask about reducing energy costs, improving home insulation, or choosing energy-efficient appliances.")
+    with st.form("energy_saver_query_form"):
+        prompt = st.text_area("Enter your query:", help="Ask about reducing energy costs, improving home insulation, or choosing energy-efficient appliances.")
         submit_button = st.form_submit_button(label="Get Advice")
         if submit_button and prompt:
             advice = get_energy_advice(prompt)

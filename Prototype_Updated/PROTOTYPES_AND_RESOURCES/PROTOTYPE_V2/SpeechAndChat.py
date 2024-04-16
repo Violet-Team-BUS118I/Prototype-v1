@@ -34,12 +34,13 @@ def text_to_speech(text):
 
 # Main function to run in the app.py
 def main():
-    st.title('Speech and Chat')
+    ##st.header('Speech and Chat')
+    st.markdown("### Speech and Chat")
     st.write("Ask me about reducing energy costs, improving home insulation, or energy-efficient appliances.")
     st.write("I will output text and audio.")
 
-    with st.form("query_form"):
-        prompt = st.text_area("Enter a query about energy consumption:", "", help="Ask about reducing energy costs, improving home insulation, or choosing energy-efficient appliances.")
+    with st.form("speech_chat_query_form"):
+        prompt = st.text_area("Enter your query:", "", help="Ask about reducing energy costs, improving home insulation, or choosing energy-efficient appliances.")
         submit_button = st.form_submit_button(label="Get Advice")
 
         if submit_button and prompt:

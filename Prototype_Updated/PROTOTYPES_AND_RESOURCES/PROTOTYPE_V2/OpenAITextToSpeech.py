@@ -17,7 +17,8 @@ def text_to_speech(text, voice='alloy'):
 
 # Streamlit UI for inputting text and generating audio
 def main():
-    st.title('Text to Speech Converter')
+    # st.header('Text to Speech Converter')
+    st.markdown("### Text to Speech")
 
     # User input for the filename
     filename = st.text_input("Enter a filename for the audio file (without extension):")

@@ -24,7 +24,7 @@ def get_energy_advice(prompt):
 def text_to_speech(text):
     try:
         response = client.audio.speech.create(
-            model="text-to-speech",
+            model="tts-1",
             voice="nova",
             input=text
         )
@@ -53,12 +53,12 @@ def main():
                 if not isinstance(audio_content, str):
                     audio_buffer = BytesIO(audio_content)
                     st.audio(audio_buffer, format="audio/mp3")
-                    st.download_button(
-                        label="Download Energy Advice as MP3",
-                        data=audio_buffer,
-                        file_name="energy_advice.mp3",
-                        mime="audio/mp3"
-                    )
+                    # st.download_button(
+                    #     label="Download Energy Advice as MP3",
+                    #    data=audio_buffer,
+                    #    file_name="energy_advice.mp3",
+                    #    mime="audio/mp3"
+                    # )
                 else:
                     st.write(audio_content)
             else:

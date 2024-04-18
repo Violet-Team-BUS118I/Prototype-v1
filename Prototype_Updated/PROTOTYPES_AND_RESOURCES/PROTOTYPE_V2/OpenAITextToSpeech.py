@@ -9,7 +9,7 @@ client = OpenAI(api_key="YOUR-API-KEY")
 # Function to convert text to speech and return the audio content
 def text_to_speech(text, voice='alloy'):
     response = client.audio.speech.create(
-        model="text-to-speech",
+        model="tts-1",
         voice=voice,  # Voice model options: alloy, echo, fable, onyx, nova, shimmer
         input=text
     )

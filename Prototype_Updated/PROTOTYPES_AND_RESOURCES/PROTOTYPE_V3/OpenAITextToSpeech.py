@@ -4,7 +4,7 @@ import streamlit as st
 from io import BytesIO
 
 # Initialize the OpenAI client with your API key
-client = OpenAI(api_key="YOUR-API-KEY")
+client = OpenAI(api_key="YOUR-API-KEY-HERE")
 
 # Function to convert text to speech and return the audio content
 def text_to_speech(text, voice='alloy'):

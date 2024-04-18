@@ -4,7 +4,7 @@ from openai import OpenAI
 from io import BytesIO
 
 # Initialize the OpenAI client with your API key
-client = OpenAI(api_key="YOUR-API-KEY")
+client = OpenAI(api_key="YOUR-API-KEY-HERE")
 
 # Function to get advice from the AI model based on user input
 def get_energy_advice(prompt):

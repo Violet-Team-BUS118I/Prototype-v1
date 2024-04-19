@@ -8,8 +8,7 @@ def main(api_key):
     assistant = client.beta.assistants.create(
         name="Energy Saver Bot",
         instructions="You are an expert in energy efficiency, renewable energy sources, and cost-saving strategies related to energy use.",
-        model="gpt-4-turbo",
-        tools=[{"type": "file_search"}],
+        model="gpt-4-turbo"
     )
 
     st.markdown("### File Search")
@@ -20,15 +19,15 @@ def main(api_key):
 
     if uploaded_file is not None:
         # Save the uploaded file to the server (if necessary)
-        with open(f'temp/{uploaded_file.name}', 'wb') as f:
+        with open(f'{uploaded_file.name}', 'wb') as f:
             f.write(uploaded_file.getbuffer())
         
         # Upload the user provided file to OpenAI
         message_file = client.files.create(
-            file=open(f'temp/{uploaded_file.name}', 'rb'), purpose="assistants"
+            file=open(f'{uploaded_file.name}', 'rb'), purpose="assistants"
         )
 
-        with st.form("speech_chat_query_form"):
+        with st.form("file_search_query_form"):
             prompt = st.text_area("Enter your query:")
             submit_button = st.form_submit_button(label="Get Advice")
             if submit_button and prompt:

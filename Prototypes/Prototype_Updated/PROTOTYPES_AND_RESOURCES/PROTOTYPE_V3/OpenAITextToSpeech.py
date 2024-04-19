@@ -4,7 +4,7 @@ import streamlit as st
 from io import BytesIO
 
 # Function to convert text to speech and return the audio content
-def text_to_speech(text, voice='alloy'):
+def text_to_speech(text, voice='nova'):
     response = client.audio.speech.create(
         model="tts-1",
         voice=voice,  # Voice model options: alloy, echo, fable, onyx, nova, shimmer
@@ -14,6 +14,8 @@ def text_to_speech(text, voice='alloy'):
 
 # Streamlit UI for inputting text and generating audio
 def main():
+    client = OpenAI(api_key= "api_key")
+   
     # st.header('Text to Speech Converter')
     st.markdown("### Text to Speech")
 

@@ -5,7 +5,6 @@ from openai import OpenAI
 import fitz
 import pytesseract
 from PIL import Image
-import time
 
 API_KEY = 'YOUR-API-KEY-HERE'
 

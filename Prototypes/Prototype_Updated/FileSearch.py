@@ -6,13 +6,16 @@ import fitz
 import pytesseract
 from PIL import Image
 
-API_KEY = 'YOUR-API-KEY-HERE'
+API_KEY = 'YOUR-API-KEY'
+client = OpenAI(api_key=API_KEY)
 
 # Sets up the page configuration and title
 def main():
     st.set_page_config(page_title="Energy Bill Analyzer", layout='centered')
     st.title("Energy Bill Analyzer")
-
+    
+    extracted_text = ""
+    
     # Instructions
     st.markdown("""
     **About:**
@@ -31,6 +34,9 @@ def main():
         st.write("Click the button below to begin analysis...")
         extracted_text = process_pdf(uploaded_file)
         display_results(extracted_text)
+        
+
+    handle_questions(client, extracted_text)
 
 # Opens the uploaded PDF file and extracts text from each page
 def process_pdf(uploaded_file):
@@ -91,6 +97,36 @@ def text_to_speech(text):
         return response.content
     except Exception as e:
         return None
+    
+    
+def generate_response_to_question(client, question, extracted_text):
+    try:
+        # Here, 'extracted_text' is the context from the PDF you want to include
+        # You might need to process 'extracted_text' to distill it into a more concise format
+        # for the system message, depending on how lengthy or detailed it is.
+        system_message = "The following information has been extracted from your energy bill: " + extracted_text
+        completion = client.chat.completions.create(
+            model="gpt-4",
+            messages=[
+                {"role": "system", "content": system_message},
+                {"role": "user", "content": question}
+            ]
+        )
+        return completion.choices[0].message.content
+    except Exception as e:
+        return f"An error occurred while generating a response: {str(e)}"
 
+def handle_questions(client, extracted_text):
+    st.write("Follow-Up Questions")
+    question = st.text_input("Do you have any follow-up questions based on your bill analysis? Type them here:", key="question")
+    if st.button('Submit Question', key='submit_question'):
+        if question:  # Check if a question has been asked
+            response = generate_response_to_question(client, question, extracted_text)
+            st.write(response)
+        else:
+            st.write("Please enter a question.")
+
+
+# Add this function call in the main function where you want the question input to appear.
 if __name__ == "__main__":
     main()

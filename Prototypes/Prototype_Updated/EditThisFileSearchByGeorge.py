@@ -8,7 +8,7 @@ import fitz
 import pytesseract
 from PIL import Image
 
-API_KEY = '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'
+API_KEY = 'YOUR-API-KEY'
 client = OpenAI(api_key=API_KEY)
 
 # Sets up the page configuration and title

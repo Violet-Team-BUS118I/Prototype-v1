@@ -8,7 +8,7 @@ import fitz
 import pytesseract
 from PIL import Image
 
-API_KEY = 'YOUR-API-KEY'
+API_KEY = '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'
 client = OpenAI(api_key=API_KEY)
 
 # Sets up the page configuration and title
@@ -71,17 +71,15 @@ def display_results(extracted_text):
             if advice:
                 st.success("Analysis completed successfully.")
                 st.session_state.advice = advice  # Save advice to session state
-                play_audio(advice)
             else:
                 st.error(f"Failed to get advice: {error}")
 
-    # Always display advice if it exists in the session state
+    # Always display advice if it exists in the session state and then play audio
     if 'advice' in st.session_state and st.session_state.advice:
         st.write("Advice based on your bill:", st.session_state.advice)
-
-    # This will handle playback without generating new audio
-    if 'audio_ready' in st.session_state and st.session_state.audio_ready:
-        play_audio(st.session_state.advice)
+        # Call the play_audio function here to display the audio player right after the advice
+        if 'audio_ready' not in st.session_state or not st.session_state.audio_ready:
+            play_audio(st.session_state.advice)
 
 
 # Analyzes the extracted text and provides advice
@@ -109,10 +107,10 @@ def play_audio(text):
         except Exception as e:
             st.session_state.audio_ready = False
             return "Failed to generate audio: " + str(e)
-    # Play the existing audio content
-    if 'audio_content' in st.session_state and st.session_state.audio_ready:
+   
+def display_audio_player():
+    if 'audio_content' in st.session_state:
         st.audio(st.session_state.audio_content, format='audio/mp3')
-
 
 # Converts the text to audio
 def text_to_speech(text):
@@ -137,10 +135,15 @@ def generate_response_to_question(client, question, extracted_text):
     except Exception as e:
         return f"An error occurred while generating a response: {str(e)}"
 
+    
+
 def handle_questions(client, extracted_text):
+    display_audio_player()
+
     st.write("Follow-Up Questions")
     question = st.text_input("Do you have any follow-up questions based on your bill analysis? Type them here:", key="question")
     submit = st.button('Submit Question', key='submit_question')
+    
     if submit and question:
         response = generate_response_to_question(client, question, extracted_text)
         st.session_state.responses.append(response)

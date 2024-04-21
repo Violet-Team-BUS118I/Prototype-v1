@@ -1,7 +1,6 @@
-# EDIT THIS FILE. IF NEEDED
+# Final Prototype_V3
 # Be sure to install 'Tesseract-OCR'
 # Run 'pip install PyMuPDF'
-
 import streamlit as st
 from openai import OpenAI
 import fitz
@@ -70,17 +69,15 @@ def display_results(extracted_text):
             advice, error = get_energy_advice(prompt, extracted_text)
             if advice:
                 st.success("Analysis completed successfully.")
-                st.session_state.advice = advice  # Save advice to session state
+                st.session_state.advice = advice
             else:
                 st.error(f"Failed to get advice: {error}")
 
     # Always display advice if it exists in the session state and then play audio
     if 'advice' in st.session_state and st.session_state.advice:
         st.write("", st.session_state.advice)
-        # Call the play_audio function here to display the audio player right after the advice
         if 'audio_ready' not in st.session_state or not st.session_state.audio_ready:
             play_audio(st.session_state.advice)
-
 
 # Analyzes the extracted text and provides advice
 def get_energy_advice(prompt, text):
@@ -96,7 +93,6 @@ def get_energy_advice(prompt, text):
 
 # Converts the text into speech and plays it back to the user
 def play_audio(text):
-    # Only generate new audio if it doesn't exist or text has changed
     if 'audio_content' not in st.session_state or st.session_state.last_advice_text != text:
         client = OpenAI(api_key=API_KEY)
         try:
@@ -134,8 +130,6 @@ def generate_response_to_question(client, question, extracted_text):
         return completion.choices[0].message.content
     except Exception as e:
         return f"An error occurred while generating a response: {str(e)}"
-
-    
 
 def handle_questions(client, extracted_text):
     display_audio_player()

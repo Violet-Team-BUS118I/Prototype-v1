@@ -135,7 +135,7 @@ def handle_questions(client, extracted_text):
     display_audio_player()
 
     st.write("**Follow-Up Questions:**")
-    question = st.text_input("Type your question below.", key="question")
+    question = st.text_input("Type your question(s) below.", key="question")
     submit = st.button('Submit', key='submit_question')
     
     if submit and question:

@@ -7,12 +7,37 @@ import fitz
 import pytesseract
 from PIL import Image
 
-API_KEY = 'YOUR-API-KEY-HERE'
+API_KEY = 'YOUR-API-KEY'
 client = OpenAI(api_key=API_KEY)
 
 # Sets up the page configuration and title
 def main():
     st.set_page_config(page_title="Energy Bill Analyzer", layout='centered')
+   
+    # Custom CSS to inject for styling
+    custom_css = """
+    <style>
+        /* General background and text color */
+        .stApp {
+            background-color: #837B7B;
+            color: #FAFAFA;
+        }
+        /* Primary color for buttons and other elements */
+        .st-bb, .st-at, .st-cb {
+            background-color: #F63366;
+        }
+        /* Secondary background for containers */
+        .st-bv {
+            background-color: #1A1A1A;
+        }
+        /* Customize fonts across the app */
+        body, .st-bx, .st-cx {
+            font-family: system-ui;
+        }
+    </style>
+    """ 
+    st.markdown(custom_css, unsafe_allow_html=True)
+    
     st.title("Energy Bill Analyzer")
     
     # Session state for the extracted text and responses

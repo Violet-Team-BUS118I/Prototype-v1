@@ -7,36 +7,36 @@ import fitz
 import pytesseract
 from PIL import Image
 
-API_KEY = 'YOUR-API-KEY'
+API_KEY = 'YOUR-API-KEY-HERE'
 client = OpenAI(api_key=API_KEY)
 
 # Sets up the page configuration and title
 def main():
     st.set_page_config(page_title="Energy Bill Analyzer", layout='centered')
-   
+
     # Custom CSS to inject for styling
-    custom_css = """
-    <style>
-        /* General background and text color */
-        .stApp {
-            background-color: #837B7B;
-            color: #FAFAFA;
-        }
-        /* Primary color for buttons and other elements */
-        .st-bb, .st-at, .st-cb {
-            background-color: #F63366;
-        }
-        /* Secondary background for containers */
-        .st-bv {
-            background-color: #1A1A1A;
-        }
-        /* Customize fonts across the app */
-        body, .st-bx, .st-cx {
-            font-family: system-ui;
-        }
-    </style>
-    """ 
-    st.markdown(custom_css, unsafe_allow_html=True)
+    #custom_css = """
+    #<style>
+       # /* General background and text color */
+       # .stApp {
+        #    background-color: #837B7B;
+       #     color: #FAFAFA;
+      #  }
+      #  /* Primary color for buttons and other elements */
+      #  .st-bb, .st-at, .st-cb {
+      #      background-color: #F63366;
+      #  }
+      #  /* Secondary background for containers */
+       # .st-bv {
+       #     background-color: #1A1A1A;
+       # }
+       # /* Customize fonts across the app */
+       # body, .st-bx, .st-cx {
+        #    font-family: system-ui;
+       # }
+   # </style>
+   # """ 
+   # st.markdown(custom_css, unsafe_allow_html=True)
     
     st.title("Energy Bill Analyzer")
     
@@ -87,7 +87,7 @@ def extract_text_from_page(page):
 
 # Sets up a form for users to submit document for analysis and displays the results
 def display_results(extracted_text):
-    prompt = "You are a virtual assistant specialized in energy savings. After analyzing the details of the provided utility bill, summarize the key points and offer specific, actionable advice that could help reduce energy costs. Focus on areas where changes can make the most impact according to the usage patterns and data from the bill. Be sure to organize your output neatly so the user can easily understand it."
+    prompt = "You are a virtual assistant specialized in energy savings. After analyzing the details of the provided utility bill, summarize the key points and offer specific, actionable advice that could help reduce energy costs. Focus on areas where changes can make the most impact according to the usage patterns and data from the bill. Be sure to organize your output neatly so the user can easily understand it. Ensure that all data and personal information are handled securely and comply with privacy regulations."
     with st.form("search_file_query_form"):
         submit_button = st.form_submit_button("Submit")
         if submit_button:
@@ -173,3 +173,4 @@ def handle_questions(client, extracted_text):
 
 if __name__ == "__main__":
     main()
+    

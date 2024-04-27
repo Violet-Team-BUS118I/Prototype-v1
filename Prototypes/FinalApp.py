@@ -87,7 +87,7 @@ def extract_text_from_page(page):
 
 # Sets up a form for users to submit document for analysis and displays the results
 def display_results(extracted_text):
-    prompt = "You are a virtual assistant specialized in energy savings. After analyzing the details of the provided utility bill, summarize the key points and offer specific, actionable advice that could help reduce energy costs. Focus on areas where changes can make the most impact according to the usage patterns and data from the bill. Be sure to organize your output neatly so the user can easily understand it. Ensure that all data and personal information are handled securely and comply with privacy regulations."
+    prompt = "You are a virtual assistant specialized in energy savings. After analyzing the details of the provided utility bill, summarize the key points and offer specific, actionable advice that could help reduce energy costs. Emphasize clear organization of information and ensure the complete omission of private data for security and privacy. Focus on areas where changes can have the most impact according to usage patterns and data from the bill. Handle all data with the utmost security, comply with privacy regulations, and redact all sensitive information, including account numbers and personal identifiers, to ensure confidentiality is maintained."
     with st.form("search_file_query_form"):
         submit_button = st.form_submit_button("Submit")
         if submit_button:
